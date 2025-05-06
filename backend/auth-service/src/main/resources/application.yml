@@ -1,0 +1,49 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: auth-service
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/idms_auth
+    username: postgres
+    password: root
+    pool:
+      enabled: true
+      initial-size: 5
+      max-size: 20
+  jackson:
+    default-property-inclusion: non_null
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: your-email@gmail.com
+    password: your-app-password
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+app:
+  base-url: http://localhost:3000
+
+jwt:
+  secret: mQyYfZBE4k4sFd89lNm2nJPMSt0kHwFodCiZuRGLpVxA7eDU6j
+  expiration: 86400000  # 24 hours in milliseconds
+  refresh-expiration: 604800000  # 7 days in milliseconds
+
+password:
+  reset:
+    expiration: 604800000
+logging:
+  level:
+    org.springframework.r2dbc: DEBUG
+    com.interiordesign: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
